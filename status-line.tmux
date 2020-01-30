@@ -18,7 +18,7 @@ tmux setw -g window-status-current-format "$FMT"
 tmux set -g status-left-length 40
 # Show clock
 tmux set -g status-interval 1
-tmux set -g status-right "[#[fg=red,bold]%H:%M:%S #[fg=black,bold]%m/%d/%Y (%a)#[fg=black]]"
+tmux set -g status-right "[${DEFAULT}%Y.%m.%d (%a) %H:%M:%S${DEFAULT}]"
 # Change color for current window
 if (( $TMUX_VERSION < 2.9 )); then
     tmux set -g window-status-current-bg cyan
