@@ -3,7 +3,12 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPT_DIR="$CURRENT_DIR/scripts"
 
-FMT="#I:#( $SCRIPT_DIR/get_name.bash #I )#{?window_flags,#{window_flags}, }"
+DEFAULT='#[bg=default]'
+LAST_WINDOW='#[bg=cyan]'
+ZOOMED_WINDOW='#[bg=magenta]'
+WINDOW_ID="#{?window_last_flag,${LAST_WINDOW},${DEFAULT}}#I${DEFAULT}"
+COLON="#{?window_zoomed_flag,${ZOOMED_WINDOW},${DEFAULT}}:${DEFAULT}"
+FMT="${WINDOW_ID}${COLON}#( $SCRIPT_DIR/get_name.bash #I)"
 TMUX_VERSION="$( tmux -V | awk '{ print $2 }' | egrep -o '[0-9.]+' )"
 
 tmux setw -g window-status-format "$FMT"
